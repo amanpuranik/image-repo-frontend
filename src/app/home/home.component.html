@@ -1,0 +1,39 @@
+<p>
+  <mat-toolbar style="color: white; background-color: black;">
+    <span>Image Repository</span>
+  </mat-toolbar>
+</p>
+
+<div class="get">
+  <button mat-button style="position:relative; left: 5px; top:2px" (click)="getImage2()">Get an image </button>
+  <input #image type="text" style="position:relative;left:10px; top: 2.99px" [(ngModel)]="imageName" prom>
+
+  <div class="image">
+    <img *ngIf="imageUrl" style="position:relative;top:100px; left:1000px; width:200px;height:200px;" [src]="imageUrl"
+      alt="Place image title">
+  </div>
+
+</div>
+ 
+<div class="delete" id="wrapper">
+  <button mat-button style="position:fixed; left: 1px; top:200px" (click)="deleteImage()">Delete an image</button>
+  <input #image type="text" style="position:fixed;left:130px; top: 200px" [(ngModel)]="imageNameDel" prom>
+</div>
+
+
+
+<input type="file" class="file-input" (change) = "onFileSelected($event)"
+       #fileUpload>
+
+<div class="file-upload">
+
+    <button mat-mini-fab color="primary" class="upload-btn"
+      (click)="fileUpload.click()" style="position:relative;top:60px;left: 25px;"  >
+        <mat-icon>attach_file</mat-icon> 
+    </button>
+
+    <button mat-button style="position:relative;left:78px; top:60px;" (click) = "uploadImage()">Upload file</button>
+</div>
+
+
+
