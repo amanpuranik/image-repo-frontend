@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
 
 declare var require: any
-const MockAPI= require('../MockAPI.js');
+//const MockAPI= require('../MockAPI.js');
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -11,44 +13,40 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ HomeComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
-  });
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
+
+
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  describe('mockAPI ', () => {
-    let mockAPI:any;
-    let mockDB = 
-    {
-    images:[
-      {
-        name:"test_image.jpeg",
-      },
-      ]
-    };
+
+
+  fdescribe('homecomponent ', () => {
 
     beforeEach(()=>{
-      mockAPI= new MockAPI(mockDB)
     })
   
-    it("returns a 400 bad request status if the request is invalid",()=>{
-      const mockApiCall=mockAPI.simulateAsyncCall({})
-      return mockApiCall.then((response: { status: any; })=>{
-        expect(response.status).toBe(400)
-      })
+    it("should populate imgage url upon method call",()=>{
+      component.getImage2();
+      expect(component.imageUrl).toBeDefined
+
     })
 
+    it("should populate imgage file upon method call",()=>{
+      component.onFileSelected(event);
+      expect(component.imageFile).toBeDefined
 
-
+    })
 
 });
 })
